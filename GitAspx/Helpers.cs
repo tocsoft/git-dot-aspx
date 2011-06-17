@@ -22,8 +22,9 @@ namespace GitAspx {
 	using System;
 	using System.ComponentModel;
 	using System.Web;
-	using System.Web.Mvc;
-	using System.Web.Routing;
+    using System.Web.Mvc;
+    using System.Web.Routing;
+    using System.Linq;
 
 	public static class Helpers {
 		static readonly string version;
@@ -37,9 +38,14 @@ namespace GitAspx {
 		}
 
 		public static string ProjectUrl(this UrlHelper urlHelper, string project) {
+
+            var host = urlHelper.RequestContext.HttpContext.Request.Url.Host;
+            if (urlHelper.RequestContext.HttpContext.User.Identity.IsAuthenticated)
+                host = urlHelper.RequestContext.HttpContext.User.Identity.Name.Split('\\').Last() + "@" + host;
+
 			return urlHelper.RouteUrl("project", new RouteValueDictionary(new {project}),
 			                          urlHelper.RequestContext.HttpContext.Request.Url.Scheme,
-			                          urlHelper.RequestContext.HttpContext.Request.Url.Host);
+			                          host);
 		}
 
 		public static string ToPrettyDateString(this DateTime d) {

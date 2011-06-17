@@ -14,7 +14,7 @@
     <AssemblyName>GitAspx</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,15 +45,24 @@
       <HintPath>..\lib\SharpZipLib\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\lib\structuremap\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -64,6 +73,16 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -71,15 +90,26 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web.WebPages" />
-    <Reference Include="System.Web.Helpers" />
+    <Reference Include="System.Web.WebPages">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
@@ -109,6 +139,78 @@
     <Content Include="Content\images\bullet.png" />
     <Content Include="Content\images\close.png" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\syntaxhighlighter\index.html" />
+    <Content Include="Content\syntaxhighlighter\scripts\shAutoloader.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushAppleScript.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushAS3.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushBash.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushColdFusion.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushCpp.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushCSharp.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushCss.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushDelphi.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushDiff.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushErlang.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushGroovy.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushJava.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushJavaFX.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushJScript.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushPerl.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushPhp.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushPlain.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushPowerShell.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushPython.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushRuby.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushSass.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushScala.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushSql.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushVb.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shBrushXml.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shCore.js" />
+    <Content Include="Content\syntaxhighlighter\scripts\shLegacy.js" />
+    <Content Include="Content\syntaxhighlighter\src\shAutoloader.js" />
+    <Content Include="Content\syntaxhighlighter\src\shCore.js" />
+    <Content Include="Content\syntaxhighlighter\src\shLegacy.js" />
+    <Content Include="Content\syntaxhighlighter\styles\shCore.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shCoreDefault.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shCoreDjango.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shCoreEclipse.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shCoreEmacs.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shCoreFadeToGrey.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shCoreMDUltra.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shCoreMidnight.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shCoreRDark.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shThemeDefault.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shThemeDjango.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shThemeEclipse.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shThemeEmacs.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shThemeFadeToGrey.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shThemeMDUltra.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shThemeMidnight.css" />
+    <Content Include="Content\syntaxhighlighter\styles\shThemeRDark.css" />
+    <Content Include="Content\syntaxhighlighter\tests\brushes\sass.html" />
+    <Content Include="Content\syntaxhighlighter\tests\brushes_tests.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\001_basic.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\002_brushes.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\003_script_tag.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\004_url_parsing.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\005_no_gutter.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\006_pad_line_numbers.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\007_collapse.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\007_collapse_interaction.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\008_first_line.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\009_class_name.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\010_highlight.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\011_smart_tabs.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\012_server_side.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\013_html_script.html" />
+    <Content Include="Content\syntaxhighlighter\tests\cases\014_legacy.html" />
+    <Content Include="Content\syntaxhighlighter\tests\commonjs_tests.js" />
+    <Content Include="Content\syntaxhighlighter\tests\js\jquery-1.4.2.js" />
+    <Content Include="Content\syntaxhighlighter\tests\js\qunit.css" />
+    <Content Include="Content\syntaxhighlighter\tests\js\qunit.js" />
+    <Content Include="Content\syntaxhighlighter\tests\syntaxhighlighter_tests.html" />
+    <Content Include="Content\syntaxhighlighter\tests\theme_tests.html" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery.modal.js" />
     <Content Include="Web.config" />
@@ -160,6 +262,38 @@
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DirectoryList\ShowDirectory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DirectoryList\ShowFile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\syntaxhighlighter\compass\config.rb" />
+    <None Include="Content\syntaxhighlighter\compass\shCore.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shCoreDefault.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shCoreDjango.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shCoreEclipse.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shCoreEmacs.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shCoreFadeToGrey.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shCoreMDUltra.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shCoreMidnight.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shCoreRDark.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shThemeDefault.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shThemeDjango.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shThemeEclipse.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shThemeEmacs.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shThemeFadeToGrey.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shThemeMDUltra.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shThemeMidnight.scss" />
+    <None Include="Content\syntaxhighlighter\compass\shThemeRDark.scss" />
+    <None Include="Content\syntaxhighlighter\compass\_theme_template.scss" />
+    <None Include="Content\syntaxhighlighter\LGPL-LICENSE" />
+    <None Include="Content\syntaxhighlighter\MIT-LICENSE" />
+    <None Include="Content\syntaxhighlighter\tests\.rvmrc" />
+    <None Include="Content\syntaxhighlighter\tests\webrick.rb" />
+    <None Include="Content\syntaxhighlighter\tests\webrick.sh" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -173,12 +307,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59086</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:59086/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

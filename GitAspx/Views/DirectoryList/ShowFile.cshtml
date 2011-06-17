@@ -1,0 +1,36 @@
+﻿@model GitAspx.ViewModels.RepositoryViewModel
+@using GitAspx;
+@{
+    ViewBag.Title = "Repositories";
+}
+
+<div class="repositoryContainer">
+	<h1><a href="@Url.Action("Show", new { repo = Model.Name, path="" })">@Model.Name</a></h1>
+
+    <h2>
+        @foreach(var p in Model.FileFolder.Parents().Reverse())
+        {
+            <text>
+                <a href='@Url.Action("Show", new { repo = Model.Name, path=p.Path })'>@p.Name</a> / 
+            </text>
+        }
+        
+            <a href='@Url.Action("Show", new { repo = Model.Name, path=Model.FileFolder.Path })'>@Model.FileFolder.Name</a>
+    </h2>
+
+    @{
+        if(new string[] { "txt", "cs", "css", "htm", "html", "js", "sql"}.Contains(Model.FileFolder.Extension))
+        {
+            <text>            
+	            <pre class='brush: @Model.FileFolder.Extension'>@Model.FileFolder.TextData;</pre>
+            </text>
+        } else if(new string[] { "png", "jpg", "jpeg", "gif" }.Contains(Model.FileFolder.Extension))
+        {
+            <text>     
+                <img src='@Url.Action("Raw", new { repo = Model.Name, path=Model.FileFolder.Path })' />
+            </text>
+        }
+    }
+</div>
+
+</asp:Content>

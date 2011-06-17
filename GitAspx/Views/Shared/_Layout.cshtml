@@ -8,6 +8,13 @@
 	<!--[if IE 7]> <style type="text/css">@@import "@Url.Content("~/Content/IE7-override.css")";</style> <![endif]-->
 	<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")"></script>
 	<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.modal.js")"></script>
+	<script src="http://cdn.jquerytools.org/1.2.5/jquery.tools.min.js"></script>
+	<script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shCore.js")"></script>
+	<script type="text/javascript" src="@Url.Content("~/Content/syntaxhighlighter/scripts/shAutoloader.js")"></script>
+	<link rel="Stylesheet" type="text/css" href="@Url.Content("~/Content/syntaxhighlighter/styles/shCore.css")" />
+    <link rel="Stylesheet" type="text/css" href="@Url.Content("~/Content/syntaxhighlighter/styles/shThemeDefault.css")" />
+
+    
 </head>
 <body>
     <div>
@@ -17,5 +24,45 @@
 			<a href="http://github.com/JeremySkinner/git-dot-aspx">Powered by GitAspx @Helpers.Version</a>
 		</div>
     </div>
+
+
+    <script>
+        function path() {
+            var args = arguments, result = [];
+
+            for (var i = 0; i < args.length; i++)
+                result.push(args[i].replace('~', '@Url.Content("~/Content/syntaxhighlighter/scripts/")'));
+
+            return result
+        };
+
+        SyntaxHighlighter.autoloader.apply(null, path(
+            'applescript            ~shBrushAppleScript.js',
+            'actionscript3 as3      ~shBrushAS3.js',
+            'bash shell             ~shBrushBash.js',
+            'coldfusion cf          ~shBrushColdFusion.js',
+            'cpp c                  ~shBrushCpp.js',
+            'c# c-sharp csharp cs   ~shBrushCSharp.js',
+            'css                    ~shBrushCss.js',
+            'delphi pascal          ~shBrushDelphi.js',
+            'diff patch pas         ~shBrushDiff.js',
+            'erl erlang             ~shBrushErlang.js',
+            'groovy                 ~shBrushGroovy.js',
+            'java                   ~shBrushJava.js',
+            'jfx javafx             ~shBrushJavaFX.js',
+            'js jscript javascript  ~shBrushJScript.js',
+            'perl pl                ~shBrushPerl.js',
+            'php                    ~shBrushPhp.js',
+            'text plain             ~shBrushPlain.js',
+            'py python              ~shBrushPython.js',
+            'ruby rails ror rb      ~shBrushRuby.js',
+            'sass scss              ~shBrushSass.js',
+            'scala                  ~shBrushScala.js',
+            'sql                    ~shBrushSql.js',
+            'vb vbnet               ~shBrushVb.js',
+            'xml xhtml xslt html    ~shBrushXml.js'
+        ));
+        SyntaxHighlighter.all();
+    </script>
 </body>
 </html>

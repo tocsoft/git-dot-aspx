@@ -31,7 +31,10 @@ namespace GitAspx {
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 			routes.IgnoreRoute("favicon.ico");
 
-			routes.MapRoute("DirectoryList", "", new {controller = "DirectoryList", action = "Index"});
+            routes.MapRoute("Explore", "_explore/{repo}/{*path}", new { controller = "DirectoryList", action = "Show", repo = "", path = "" });
+            routes.MapRoute("Raw", "_raw/{repo}/{*path}", new { controller = "DirectoryList", action = "Raw", repo = "", path = "" });
+
+            routes.MapRoute("DirectoryList", "", new { controller = "DirectoryList", action = "Index" });
 			routes.MapRoute("DirectoryListCreate", "Create", new { controller = "DirectoryList", action = "Create" });
 
 			routes.MapRoute("info-refs", "{project}/info/refs",

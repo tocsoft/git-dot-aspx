@@ -6,18 +6,34 @@ namespace GitAspx.ViewModels {
 		private Repository repository;
 		private CommitInfo latestCommit;
 
-		public RepositoryViewModel(Repository repository) {
+        public RepositoryViewModel(Repository repository, FileTree fileFolder)
+            : this(repository)
+        {
+            FileFolder = fileFolder;
+        }
+        public RepositoryViewModel(Repository repository)
+        {
 			this.repository = repository;
 			this.latestCommit = repository.GetLatestCommit();
 		}
 
 		public string Name {
-			get { return repository.Name; }
+			get
+            { 
+                return repository.Name; 
+            }
 		}
 
-		private string CommitDate {
-			get { return latestCommit != null ? latestCommit.Date.ToPrettyDateString() : string.Empty; }
-		}
+        private string CommitDate
+        {
+            get { return latestCommit != null ? latestCommit.Date.ToPrettyDateString() : string.Empty; }
+        }
+
+        public FileTree FileFolder
+        {
+            get;
+            private set;
+        }
 
 		private string Message {
 			get {

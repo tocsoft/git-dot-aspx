@@ -1,0 +1,40 @@
+﻿@model GitAspx.ViewModels.RepositoryViewModel
+@using GitAspx;
+@{
+    ViewBag.Title = "Repositories";
+}
+
+<div class="repositoryContainer">
+	<h1><a href="@Url.Action("Show", new { repo = Model.Name, path="" })">@Model.Name</a> @foreach(var p in Model.FileFolder.Parents().Reverse())
+        {
+            <text>
+                <a href='@Url.Action("Show", new { repo = Model.Name, path=p.Path })'>@p.Name</a> / 
+            </text>
+        }
+        
+            <a href='@Url.Action("Show", new { repo = Model.Name, path=Model.FileFolder.Path })'>@Model.FileFolder.Name</a></h1>		
+    
+    @Url.ProjectUrl(Model.Name)
+
+    
+
+	<ul id="folders">
+		@foreach (var f in Model.FileFolder.Where(x => x.IsDirectory))
+        {
+			<li>
+				<a class='repository' href='@Url.Action("Show", new { repo = Model.Name, path = f.Path } )'>@f.Name</a>
+			</li>
+		}
+	</ul>
+    <ul id="files">
+		@foreach (var f in Model.FileFolder.Where(x => !x.IsDirectory))
+        {
+			<li>
+				<a href='@Url.Action("Show", new { repo = Model.Name, path = f.Path } )/'>@f.Name</a>
+			</li>
+		}
+	</ul>
+
+</div>
+
+</asp:Content>

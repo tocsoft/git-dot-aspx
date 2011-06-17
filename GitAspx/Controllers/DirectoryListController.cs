@@ -23,6 +23,7 @@ namespace GitAspx.Controllers {
 	using GitAspx.Lib;
 	using GitAspx.ViewModels;
 	using System.Linq;
+    using System.Web.Security;
 
 	public class DirectoryListController : Controller {
 		readonly RepositoryService repositories;
@@ -31,12 +32,31 @@ namespace GitAspx.Controllers {
 			this.repositories = repositories;
 		}
 
-		public ActionResult Index() {
-			return View(new DirectoryListViewModel {
-				RepositoriesDirectory = repositories.GetRepositoriesDirectory().FullName,
-				Repositories = repositories.GetAllRepositories().Select(x => new RepositoryViewModel(x))
-			});
-		}
+        public ActionResult Index()
+        {
+            return View(new DirectoryListViewModel
+            {
+                RepositoriesDirectory = repositories.GetRepositoriesDirectory().FullName,
+                Repositories = repositories.GetAllRepositories().Select(x => new RepositoryViewModel(x))
+            });
+        }
+        public ActionResult Show(string repo, string path)
+        {
+            var rep = repositories.GetRepository(repo);
+            var filefolder = rep.GetFileTree(path);
+            if (filefolder.IsDirectory)
+                return View("ShowDirectory", new RepositoryViewModel(rep, filefolder));
+            else
+                return View("ShowFile", new RepositoryViewModel(rep, filefolder));
+        }
+
+        public ActionResult Raw(string repo, string path)
+        {
+            var rep = repositories.GetRepository(repo);
+            var filefolder = rep.GetFileTree(path);
+
+            return File(filefolder.Data, "application/octet-stream", filefolder.Name);
+        }
 
 		[HttpPost]
 		public ActionResult Create(string project) {

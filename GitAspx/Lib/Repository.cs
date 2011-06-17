@@ -53,20 +53,46 @@ namespace GitAspx.Lib {
 			}
 		}
 
-		public CommitInfo GetLatestCommit() {
-			using (var repository = new GitSharp.Repository(FullPath)) {
-				var commit = repository.Head.CurrentCommit;
 
-				if (commit == null) {
-					return null;
-				}
 
-				return new CommitInfo {
-					Message = commit.Message,
-					Date = commit.CommitDate.DateTime
-				};
-			}
-		}
+        public FileTree GetFileTree(string path)
+        {
+            var p = path ?? "";
+            var pa = p.Split('/', '\\');
+
+            FileTree file = null;
+            using (var repository = new GitSharp.Repository(FullPath))
+            {
+                file = new FileTree(repository.Head.CurrentCommit.Tree);
+            }
+            
+            foreach(var d in pa)
+            {
+                if (file.Contains(d))
+                    file = file[d];
+            }
+
+            return file;
+        }
+
+        public CommitInfo GetLatestCommit()
+        {
+            using (var repository = new GitSharp.Repository(FullPath))
+            {
+                var commit = repository.Head.CurrentCommit;
+
+                if (commit == null)
+                {
+                    return null;
+                }
+
+                return new CommitInfo
+                {
+                    Message = commit.Message,
+                    Date = commit.CommitDate.DateTime
+                };
+            }
+        }
 
 		private GitSharp.Core.Repository GetRepository() {
 			return GitSharp.Core.Repository.Open(directory);
@@ -131,8 +157,70 @@ namespace GitAspx.Lib {
 		}
 	}
 
-	public class CommitInfo {
-		public string Message { get; set; }
-		public DateTime Date { get; set; }
-	}
+    public class CommitInfo
+    {
+        public string Message { get; set; }
+        public DateTime Date { get; set; }
+    }
+
+    public class FileTree : System.Collections.ObjectModel.KeyedCollection<string, FileTree>
+    {
+        public FileTree(GitSharp.Tree tree)
+        {
+            Name = tree.Name;
+            Path = tree.Path;
+
+            foreach (var n in tree.Children.Where(x => x is GitSharp.Tree).Cast<GitSharp.Tree>())
+            {
+                this.Add(new FileTree(n) { Parent = this });
+            } 
+            foreach (var n in tree.Children.Where(x => x is GitSharp.Leaf).Cast<GitSharp.Leaf>())
+            {
+                this.Add(new FileTree(n) { Parent = this });
+            }
+            IsDirectory = true;
+        }
+
+        public FileTree(GitSharp.Leaf leaf)
+        {
+            Name = leaf.Name;
+            Path = leaf.Path;
+            Extension = System.IO.Path.GetExtension(Name).TrimStart('.');
+            
+
+            IsDirectory = false;
+            _leaf = leaf;
+        }
+        internal GitSharp.Leaf _leaf;
+
+        public string Name { get; private set; }
+        public string Extension { get; private set; }
+
+        public string Path { get; private set; }
+        public FileTree Parent { get; private set; }
+        public bool IsDirectory { get; set; }
+        
+
+        public byte[] Data { get { return _leaf.RawData; } }
+        public string TextData { get { return _leaf.Data; } }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+        protected override string GetKeyForItem(FileTree item)
+        {
+            return item.Name;
+        }
+
+        public IEnumerable<FileTree> Parents() { 
+            var p = this.Parent;
+            while (p != null)
+            {
+                yield return p;
+                p = p.Parent;
+            }
+        }
+    }
+
 }
